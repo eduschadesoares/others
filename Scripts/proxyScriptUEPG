@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#Proxy UEPG - Apt-Get Script
+#1 - Comentar linhas de /etc/apt/apt.conf
+#2 - Executar chmod +x neste arquivo
+#3 - Executar este arquivo com " . proxy"
+
+echo -n "Insira o usuário: "
+read n
+echo -n "Insira a senha: "
+read -s p
+echo ""
+
+http_proxy=http://${n}:${p}@proxy.uepg.br:8080/
+http_proxy=https://${n}:${p}@proxy.uepg.br:8080/
+http_proxy=ftp://${n}:${p}@proxy.uepg.br:8080/
+
+export http_proxy
+export https_proxy
+export ftp_proxy
