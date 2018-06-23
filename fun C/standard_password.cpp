@@ -61,6 +61,7 @@
 				nelso--;
 			}
 		}
+		
 
 		printf("\nVose atingio o numero massimo de tentativas, cai fora!\n\n");
 	/*	printf("  ===============================================================================\n");
