@@ -1,1 +1,1 @@
-# Just for fun
+# Other codes
