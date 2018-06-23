@@ -6,68 +6,67 @@
 	#include <unistd.h>
 	#include <conio.h>
 	#define N 30
-	
+
 	//Global variables
 	char adminpass[N]; //password variable (admin)
 	char adminuser[N]; //user variable (admin)
 	char otruser[N]; //user variable (any)
 	char otrpass[N]; //password variable (any)
-	
-	//Void functions 
+
+	//Void functions
 	void login(); //First void function //Calls (menu)
-	void menu(); //Calls these next functions: 
+	void menu(); //Calls these next functions:
 	void admuser(); //(Admin user)= Creates an admin login
-	void newuser(); //(New user)= A user may create a new user  
+	void newuser(); //(New user)= A user may create a new user
 	void newpass(); //(New password)= Also created by a user that creates a user
 	void menurld(); //(Menu reload)= Reloads again with 2 diferent users
 	void admpassvrf(); //(Admin password verification) Verifies the password
 	void otrpassvrf(); //(Other password verification) Also virifies the password
 
-
 	int main() {
 		setlocale(LC_ALL, "portuguese");
 		login();
-		system("pause");		
+		system("pause");
 		return 0;
 	}
 
 	//Calling the other void functions
 	void login() {
-		menu();		
+		menu();
 	}
-	
+
 	//Loading the menu
 	void menu() {
 		int i=0, chs;
 		admuser(); //Adding the admin user
-				
+
 		//Initializing in main menu
 		while(i==0) {
 		printf(" ========================================\n");
 		printf(" ===        Login to continue         ===\n");
 		printf(" ========================================\n");
-		
+
 		printf(" ===   User: "); //Showing the main user
 		for(i=0; i<10; i++) {
 			printf("%c", adminuser[i]);
 		}
-		printf(" | Press (1)   ===\n");	
+		printf(" | Press (1)   ===\n");
 		printf(" ========================================\n");
 		printf(" ========================================\n");
 		printf(" ===   User: New        | Press (2)   ===\n");
 		printf(" ========================================\n");
 			chs=getch();
-			
+
 			//Choosing the user
 			switch(chs) {
-				case '1' : 
+				case '1' :
 					system("cls");
 					admpassvrf();
 					i++;
 					break;
 				case '2' :
 					system("cls");
-					newuser();								
+					newuser();
 					i++;
 					break;
 				default :
@@ -78,16 +77,16 @@
 			}
 		}
 	}
-	
+
 	//Adding a main user
 	void admuser() {
 		int i, userlen, passlen;
-		
+
 		//Setting the admin password & user
 		char mainpass[N]=("robson");
 		char mainuser[N]=("admin"); //Max= 10 characters
 		passlen=strlen(mainpass);
-		userlen=strlen(mainuser);		
+		userlen=strlen(mainuser);
 		for(i=0; i<passlen; i++) {
 			adminpass[i]=mainpass[i];
 		}
@@ -96,7 +95,7 @@
 		}
 	}
 
-	//Creating a new user	
+	//Creating a new user
 	void newuser() {
 		int i=0, j=0, chs, userlen;
 		char newuser[N];
@@ -111,10 +110,10 @@
 			for(i=0; i<userlen; i++) {
 				printf("%c", newuser[i]);
 			}
-			
+
 			printf("\" user?");
 			printf("\n");
-			
+
 			while(j==0) {
 				printf(" ===================================\n");
 				printf(" ===   If you want | Press (1)   ===\n");
@@ -140,21 +139,21 @@
 					default :
 						printf(" %c is an invalid option, try again.\n", chs);
 						j=0;
-						break;		
-				}			
-			}		
+						break;
+				}
+			}
 		}
 	}
-	
+
 	//Creating a new password
 	void newpass() {
 		int i, chs, mark=0, loop=0, userlen, passlen, passlencfm;
 		char newpass[N], newpasscfm[N];
-		system("cls"); //Cleans the screen 
+		system("cls"); //Cleans the screen
 		userlen=strlen(otruser);
-		
+
 		while(loop==0) {
-			mark=0;		
+			mark=0;
 			printf(" Insert a password for \"");
 			for(i=0; i<userlen; i++) {
 				printf("%c", otruser[i]);
@@ -163,23 +162,23 @@
 			gets(newpass);
 			fflush(stdin);
 			passlen=strlen(newpass);
-			
+
 			printf(" Please, repeat the password: "); //Confirming the password
 			gets(newpasscfm);
 			fflush(stdin);
 			passlencfm=strlen(newpasscfm);
-			
-			if(passlen==passlencfm) { 
+
+			if(passlen==passlencfm) {
 				for(i=0; i<passlen; i++) {
 					if(newpass[i]!=newpasscfm[i]) {
 						mark++;
-					}				
+					}
 				}
 			}
 			else {
 				mark++;
 			}
-		
+
 			if(mark>0) {
 				printf(" Passwords don't match. Try again.\n"); //Errou
 			}
@@ -187,14 +186,14 @@
 				loop=1;
 			}
 		}
-		
+
 		for(i=0; i<passlen; i++) {
 			otrpass[i]=newpass[i];
 		}
 		//Going to the second menu
 		menurld();
 	}
-	
+
 	//Reloading a new menu
 	void menurld() {
 		int i=0, chs, userlen, adminuserlen;
@@ -203,18 +202,18 @@
 		while(i==0) {
 			printf(" ========================================\n"); //Now are 3 choices
 			printf(" ===        Login to continue         ===\n");
-			printf(" ========================================\n");			
+			printf(" ========================================\n");
 			printf(" ===   User: "); //Showing the main user
 			for(i=0; i<10; i++) {
 				printf("%c", adminuser[i]);			}
-			printf(" | Press (1)   ===\n");	
-			printf(" ========================================\n");			
+			printf(" | Press (1)   ===\n");
+			printf(" ========================================\n");
 			printf(" ===   User: "); //Showing the other user
 			for(i=0; i<10; i++) {
 				printf("%c", otruser[i]); //Max= 10 characters
 			}
-			printf(" | Press (2)   ===\n");	
-					
+			printf(" | Press (2)   ===\n");
+
 			printf(" ========================================\n");
 			printf(" ===   User: New        | Press (3)   ===\n");
 			printf(" ========================================\n");
@@ -244,16 +243,16 @@
 					printf(" Do you really want to create a new user? ¬¬\n");
 					newuser(); //Creates a new user again
 					i++;
-					break;			
+					break;
 				default :
 					printf(" %c is an invalid option, try again.", chs);
 					printf("\n");
 					i=0;
-					break;				
-			}			
-		}		
+					break;
+			}
+		}
 	}
-	
+
 	//Verifying the main password
 	void admpassvrf() {
 		int i=0, cnc=3, mark=0, aux;
@@ -265,7 +264,7 @@
 		while(cnc>=0) {
 			i=0;
 			mark=0;
-			printf(" Insert the password: ");			
+			printf(" Insert the password: ");
 			printf("\n");
 			for(aux=passlen; aux>0; aux--) {
 				printf("|-|");
@@ -274,20 +273,20 @@
 			while(i<passlen) {
 				inspass[i]=getch();
 				printf(" * "); //Show only "*" instead what is typed
-				
+
 				if(inspass[i]!=adminpass[i]){
 					mark++; //Testing the typed password
-				}				
+				}
 				i++;
 			}
 			printf("\n");
-			
+
 			if(mark==0) {
 				printf(" You are logged in as ");
 				for(i=0; i<userlen; i++) {
 					printf("%c", adminuser[i]);
 				}
-				printf("!\n");							
+				printf("!\n");
 				break;
 			}
 			else {
@@ -299,20 +298,20 @@
 					printf(" Wrong password. Try again. (%d more try)\n", cnc);
 					}
 				}
-				cnc--;	
-			}	
+				cnc--;
+			}
 		}
-		
+
 		if(cnc<0) {
 			printf("\n You failed more than 3 times. Try again.\n\n");
-			sleep(4); 
+			sleep(4);
 			system("cls");
 			menu();
 		}
 	}
-	
+
 	//Verifying the other password
-	void otrpassvrf() { 
+	void otrpassvrf() {
 		int i=0, cnc=3, mark=0, aux; //Same void function but different password
 		int passlen, userlen;
 		char inspass[N];
@@ -326,19 +325,19 @@
 			for(aux=passlen; aux>0; aux--) {
 				printf("|-|");
 			}
-			printf("\n");			
-			
+			printf("\n");
+
 			while(i<passlen) {
 				inspass[i]=getch();
 				printf(" * ");
-				
+
 				if(inspass[i]!=otrpass[i]){ //Another password
 					mark++;
-				}				
+				}
 				i++;
 			}
 			printf("\n");
-			
+
 			if(mark==0) {
 				printf(" You are logged in as ");
 				for(i=0; i<userlen; i++) {
@@ -356,14 +355,14 @@
 					printf(" Wrong password. Try again. (%d more try)\n", cnc);
 					}
 				}
-				cnc--;	
-			}	
+				cnc--;
+			}
 		}
-		
+
 			if(cnc<0) {
 				printf("\n You failed more than 3 times. Try again.\n\n");
 				sleep(4);
-				system("cls");		
+				system("cls");
 				menurld(); //Returns to menu reload
-			}	
+			}
 	}
