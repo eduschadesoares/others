@@ -4,6 +4,7 @@
 #1 - Comentar linhas de /etc/apt/apt.conf
 #2 - Executar chmod +x neste arquivo
 #3 - Executar este arquivo com " . proxy"
+#4 - Executar apt-get
 
 echo -n "Insira o usuário: "
 read n
